@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0m/home/dmitry/IdeaProjects/scala_test_mission/src/main/scala/Tree/Tree.scala:45:10: reassignment to val[0m
+[0m[[0m[31merror[0m] [0m[0m    tree = rebuildTree(tree.node, mySort(tree.leaves), List())[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/dmitry/IdeaProjects/scala_test_mission/src/main/scala/Tree/Tree.scala:47:12: reassignment to val[0m
+[0m[[0m[31merror[0m] [0m[0m      tree = redundantLeaves()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

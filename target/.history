@@ -1,0 +1,9 @@
+scala -cp scalatest_2.12-3.0.5.jar org.scalatest.run ExampleSpec
+1+2
+scala -cp scalatest_2.12-3.0.5.jar org.scalatest.run ExampleSpec
+1 + 2
+test
+buildDependencies
+test
+test]
+test
