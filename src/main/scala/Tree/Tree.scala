@@ -1,21 +1,21 @@
 package Tree
 
-case class Tree(var tree: Node, W: Int) {
+case class Tree(root: Node, W: Int) {
 
   require(W >= 0, "Error, only unsigned or null value")
 
-  private def isRedundant = W > 0
+  private def isRedundantTree = W > 0
 
-  private def rebuildTree(node: Array[Node], thisLeaves: List[Leaf], redundantLeaves: List[Leaf]): Node = {
-    if (redundantLeaves.isEmpty) Node(node, thisLeaves)
+  private def rebuildRoot(node: Array[Node], newLeaves: List[Leaf], redundantLeaves: List[Leaf]): Node = {
+    if (redundantLeaves.isEmpty) Node(node, newLeaves)
     else {
-       if (tree.node.isEmpty){
-         Node(Array(Node(Array(), redundantLeaves)), thisLeaves)
+       if (node.isEmpty){
+         Node(Array(Node(Array(), redundantLeaves)), newLeaves)
        } else {
 
-         val firstElem = Array(Node(tree.node.head.node, tree.node.head.setLeaves(redundantLeaves)))
-         val anotherElems = tree.node.drop(0)
-         Node(firstElem ++ anotherElems , thisLeaves)
+         val firstElem = Array(Node(node.head.node, node.head.setLeaves(redundantLeaves)))
+         val anotherElems = node.drop(0)
+         Node(firstElem ++ anotherElems , newLeaves)
        }
     }
   }
@@ -41,20 +41,23 @@ case class Tree(var tree: Node, W: Int) {
     sort(list)((l1: Leaf, l2: Leaf) => l1.weight < l2.weight)
   }
 
-  def sort(): Unit = {
-    tree = rebuildTree(tree.node, mySort(tree.leaves), List())
-    if(isRedundant) {
-      tree = rebuildTree(tree.node, getNewLeaves(tree.leaves), getRedundantLeaves(tree.leaves))
+  def sort(): Tree = {
+    val sortTree = Tree(Node(root.node, mySort(root.leaves)), W)
+
+    if (isRedundantTree) {
+      Tree(rebuildRoot(sortTree.root.node, getNewLeaves(sortTree.root.leaves), getRedundantLeaves(sortTree.root.leaves)), W)
+    } else {
+      sortTree
     }
   }
 
   private def getNewLeaves(list: List[Leaf]): List[Leaf] = {
     var acc = 0
-    tree.leaves takeWhile  (l => if(acc >= W) false else {acc += l.weight; true })
+    list takeWhile  (l => if(acc >= W) false else {acc += l.weight; true })
   }
 
   private def getRedundantLeaves(list: List[Leaf]): List[Leaf] = {
     var acc = 0
-    tree.leaves dropWhile (l => if(acc >= W) false else { acc += l.weight; true })
+    list dropWhile (l => if(acc >= W) false else { acc += l.weight; true })
   }
 }

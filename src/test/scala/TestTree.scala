@@ -20,17 +20,17 @@ class TestTree extends FlatSpec {
   val tree: Tree = this.initialized(0)
   "Tree.A tree leaves" should "be sorted" in {
     val sortedLeaves: List[Leaf] = List(b1, b2, b3, b4)
-    tree.sort()
-    assert(sortedLeaves === tree.tree.leaves)
+    val sortTree = tree.sort()
+    assert(sortedLeaves === sortTree.root.leaves)
   }
 
   val redundantTree: Tree = this.initialized(3)
   "Redundant tree.A tree leaves" should "be sorted" in {
     val sortedRedundantTreeLeaves: List[Leaf] = List(b1, b2)
     val childrenNodeLeaves: List[Leaf] = List(b3, b4)
-    redundantTree.sort()
-    assert(sortedRedundantTreeLeaves === redundantTree.tree.leaves)
-    assert(childrenNodeLeaves === redundantTree.tree.node(0).leaves)
+    val redundantSortTree = redundantTree.sort()
+    assert(sortedRedundantTreeLeaves === redundantSortTree.root.leaves)
+    assert(childrenNodeLeaves === redundantSortTree.root.node(0).leaves)
   }
 
 }

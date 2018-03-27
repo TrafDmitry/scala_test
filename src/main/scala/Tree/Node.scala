@@ -9,4 +9,5 @@ case class Node(node: Array[Node], leaves: List[Leaf]) {
     }
     concat(leaves, newList)
   }
+
 }
