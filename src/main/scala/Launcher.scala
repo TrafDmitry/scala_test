@@ -14,7 +14,7 @@ object Launcher extends App {
   val listLeaves3 = List(leaf2, leaf3, leaf1, leaf5)
 
   val node2 = Node(Array(), listLeaves2)
-  val node3 = Node(Array(), listLeaves2)
+  val node3 = Node(Array(node2), listLeaves2)
   val node1 = Node(Array(node2, node3), listLeaves)
 
   val tree = node1.sort(node1, 3)
