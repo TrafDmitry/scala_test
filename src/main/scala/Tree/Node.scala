@@ -59,22 +59,23 @@ case class Node(node: Array[Node], leaves: List[Leaf]) {
     * @return Node
     */
   def sort(node: Node, W: Int, moreLeaves: List[Leaf] = List()): Node = {
-    def loop(node: Node, W: Int, moreLeaves: List[Leaf] = List()): Node = node match {
+    def loop(node: Node, W: Int, index: Int, moreLeaves: List[Leaf] = List()): Node = node match {
       case Node(Array(), List()) =>
-        println("Empty node")
         node
       case Node(Array(), _) =>
-        println("Empty array")
-        Node(node.node, getNewLeaves(sortLeaves(node.appendLeaves(moreLeaves)), W))
+        if (index == 0) {
+          Node(node.node, getNewLeaves(sortLeaves(node.appendLeaves(moreLeaves)), W))
+        } else {
+          Node(node.node, getNewLeaves(sortLeaves(node.leaves), W))
+        }
       case Node(_, _) =>
-        println("With array and list")
         val sortedLeaves = sortLeaves(node.appendLeaves(moreLeaves))
         val newLeaves = getNewLeaves(sortedLeaves, W)
         val redundantLeaves = getRedundantLeaves(sortedLeaves, W)
-        Node(node.node.map(node => loop(node, W, redundantLeaves)), newLeaves)
+        Node(node.node.map(subNode => loop(subNode, W, node.node.indexOf(subNode), redundantLeaves)), newLeaves)
 
     }
-    loop(node, W, moreLeaves)
+    loop(node, W, 0, moreLeaves)
   }
 
   /**

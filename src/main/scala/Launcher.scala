@@ -17,9 +17,12 @@ object Launcher extends App {
   val node3 = Node(Array(node2), listLeaves2)
   val node1 = Node(Array(node2, node3), listLeaves)
 
-  val tree = node1.sort(node1, 3)
-  tree.print(0)
+  println("BEFORE")
+  node1.print(0)
 
+  val tree = node1.sort(node1, 3)
+  println("AFTER")
+  tree.print(0)
 }
 
 
